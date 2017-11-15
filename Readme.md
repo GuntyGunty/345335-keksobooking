@@ -1,7 +1,7 @@
 # Личный проект «Кексобукинг» [![Build status][travis-image]][travis-url]
 
 * Студент: [Анастасия Беляева](https://up.htmlacademy.ru/javascript/11/user/345335).
-* Наставник: `Неизвестно`.
+* Наставник: [Александр Смирнов](https://up.htmlacademy.ru/javascript/11/user/516117).
 
 ---
 

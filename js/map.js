@@ -71,11 +71,11 @@ var render = function() {
     return pinElement
 }
 
-var createPins = function() {
-    
-    for (var i = 0; i < advertsCount; i++) {
-        pins.appendChild(render(createAdvert()[i]));
-    }
-};
 
-createPins();
+    var fragment = document.createDocumentFragment();
+    
+        for (var i = 0; i < createAdvert.length; i++) {
+            fragment.appendChild(render(createAdvert()[i]));
+        }
+    
+ pins.appendChild(fragment);

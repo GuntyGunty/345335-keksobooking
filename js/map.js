@@ -236,21 +236,3 @@ var renderPopup = function (ad) {
 
   return articleElement;
 };
-
-// var pins = document.querySelectorAll('.map__pin');
-
-// var cardOpen = function () {
-//   var target = event.target;
-//   target.parentNode.classList.add('map__pin--active');
-//   document.querySelector('article.popup').style = 'display: block;';
-//   articleElement.querySelector('.popup__avatar').src = document.querySelector('.map__pin--active img').src;
-// };
-
-
-
-// cardCloseButton.addEventListener('keydown', function (evt) {
-//   if (evt.keyCode === ESC_KEYCODE) {
-//     cardClose();
-//   }
-// });
-

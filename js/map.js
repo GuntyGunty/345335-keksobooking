@@ -12,18 +12,16 @@ var getRandomFeatures = function () {
   return APARTMENT_FEATURES.slice(0, getRandomInteger(1, APARTMENT_FEATURES.length - 1));
 };
 
+var ESC_KEYCODE = 27;
+var ENTER_KEYCODE = 13;
+
 var ADS_TITLES = ['Большая уютная квартира', 'Маленькая неуютная квартира', 'Огромный прекрасный дворец', 'Маленький ужасный дворец', 'Красивый гостевой домик', 'Некрасивый негостеприимный домик', 'Уютное бунгало далеко от моря', 'Неуютное бунгало по колено в воде'];
-
 var ADS_TYPES = ['flat', 'house', 'bungalo'];
-
 var CHECK_TIMES = ['12:00', '13:00', '14:00'];
-
 var APARTMENT_FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
 
 var mainPin = document.querySelector('.map__pin--main');
-
 var formFields = document.querySelectorAll('fieldset');
-
 
 var typeTranslationMap = {
   flat: 'квартира',
@@ -39,8 +37,6 @@ window.onload = function () {
 };
 
 var ShowOnMouseUp = function () {
-
-
   for (var index = 0; index < formFields.length; index++) {
     formFields[index].disabled = false;
   }
@@ -48,12 +44,12 @@ var ShowOnMouseUp = function () {
 };
 
 var showPins = function () {
-
-
   document.querySelector('.map').classList.remove('map--faded');
   document.querySelector('.notice__form').classList.remove('notice__form--disabled');
 
   var getAds = function (advertsCount) {
+    mainPin.removeEventListener('mouseenter', ShowOnMouseUp);
+
     var adverts = [];
 
     for (var i = 0; i < advertsCount; i++) {
@@ -140,26 +136,48 @@ var showPins = function () {
   document.querySelector('.map').insertBefore(articleElement, document.querySelector('.map__filters-container'));
 
   document.querySelector('article.popup').style = 'display: none;';
-  mainPin.removeEventListener('mouseenter', ShowOnMouseUp);
 
   var pins = document.querySelectorAll('.map__pin');
 
   for (var pin = 0; pin < pins.length; pin++) {
     pins[pin].addEventListener('click', function () {
-      var target = event.target;
-      target.parentNode.classList.add('map__pin--active');
-      document.querySelector('article.popup').style = 'display: block;';
-      articleElement.querySelector('.popup__avatar').src = document.querySelector('.map__pin--active img').src;
+      cardOpen();
     });
   }
 
+  for (var j = 0; j < pins.length; j++) {
+    if (pins[j].focused === true) {
+      pins[j].addEventListener('keydown', function (evt) {
+        if (evt.keyCode === ENTER_KEYCODE) {
+          cardOpen();
+        }
+      });
+    }
+  }
+
+  var cardOpen = function () {
+    var target = event.target;
+    target.parentNode.classList.add('map__pin--active');
+    document.querySelector('article.popup').style = 'display: block;';
+    articleElement.querySelector('.popup__avatar').src = document.querySelector('.map__pin--active img').src;
+  };
+
+
   var cardCloseButton = document.querySelector('.popup__close');
   cardCloseButton.addEventListener('click', function () {
+    cardClose();
+  });
 
+  cardCloseButton.addEventListener('keydown', function (evt) {
+    if (evt.keyCode === ESC_KEYCODE) {
+      cardClose();
+    }
+  });
+
+  var cardClose = function () {
     document.querySelector('.map__pin--active').disabled = true;
     document.querySelector('.map__pin--active').classList.remove('map__pin--active');
-
     document.querySelector('article.popup').style = 'display: none;';
-  });
+  };
 };
 

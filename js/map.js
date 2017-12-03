@@ -22,6 +22,67 @@ var APARTMENT_FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator',
 
 var mainPin = document.querySelector('.map__pin--main');
 var formFields = document.querySelectorAll('fieldset');
+var inputSelectField = document.querySelector('#type');
+var inputSelectType = document.querySelectorAll('#type option');
+var inputPriceType = document.querySelector('#price');
+var inputRoomType = document.querySelector('#room_number');
+var inputRoomCount = document.querySelectorAll('#room_number option');
+var inputGuestCount = document.querySelectorAll('#capacity option');
+var inputTimeIn = document.querySelectorAll('#timein option');
+var inputTimeOut = document.querySelectorAll('#timeout option');
+var inputTimeField = document.querySelector('#timein');
+
+inputSelectField.addEventListener('click', function () {
+  setPriseValue();
+});
+
+var setPriseValue = function () {
+  for (var j = 0; j < inputSelectType.length; j++) {
+    if (inputSelectType[0].selected === true) {
+      inputPriceType.placeholder = '0';
+    } else if (inputSelectType[1].selected === true) {
+      inputPriceType.placeholder = '1000';
+    } else if (inputSelectType[2].selected === true) {
+      inputPriceType.placeholder = '5000';
+    } else if (inputSelectType[3].selected === true) {
+      inputPriceType.placeholder = '10000';
+    }
+  }
+};
+
+inputTimeField.addEventListener('click', function () {
+  setTime();
+});
+
+var setTime = function () {
+  for (var j = 0; j < inputTimeIn.length; j++) {
+    if (inputTimeIn[0].selected === true) {
+      inputTimeOut[0].selected = true;
+    } else if (inputTimeIn[1].selected === true) {
+      inputTimeOut[1].selected = true;
+    } else if (inputTimeIn[2].selected === true) {
+      inputTimeOut[2].selected = true;
+    }
+  }
+};
+
+inputRoomType.addEventListener('click', function () {
+  setGuestnumber();
+});
+
+var setGuestnumber = function () {
+  for (var j = 0; j < inputRoomCount.length; j++) {
+    if (inputRoomCount[0].selected === true) {
+      inputGuestCount[2].selected = true;
+    } else if (inputRoomCount[1].selected === true) {
+      inputGuestCount[1].selected = true;
+    } else if (inputRoomCount[2].selected === true) {
+      inputGuestCount[0].selected = true;
+    } else if (inputRoomCount[3].selected === true) {
+      inputGuestCount[3].selected = true;
+    }
+  }
+};
 
 var typeTranslationMap = {
   flat: 'квартира',

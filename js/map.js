@@ -37,9 +37,9 @@ inputSelectField.addEventListener('click', function () {
 
 var setPriseValue = function () {
   for (var j = 0; j < inputSelectType.length; j++) {
-    if (inputSelectType[0].selected === true) {
+    if (inputSelectType[1].selected === true) {
       inputPriceType.placeholder = '0';
-    } else if (inputSelectType[1].selected === true) {
+    } else if (inputSelectType[0].selected === true) {
       inputPriceType.placeholder = '1000';
     } else if (inputSelectType[2].selected === true) {
       inputPriceType.placeholder = '5000';

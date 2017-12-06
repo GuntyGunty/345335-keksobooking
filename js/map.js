@@ -231,8 +231,6 @@ var onClickPin = function (i) {
   return result;
 };
 
-
-
 var renderPopup = function (ad) {
   var articleElement = document.querySelector('template').content.querySelector('article.map__card').cloneNode(true);
   articleElement.querySelector('h3').textContent = ad.offer.title;

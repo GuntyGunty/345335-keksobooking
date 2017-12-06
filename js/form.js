@@ -28,6 +28,7 @@
   };
 
   inputSelectType.addEventListener('change', function (evt) {
+    inputPriceType.min = getPriceByApartmentType(evt.target.value);
     inputPriceType.value = getPriceByApartmentType(evt.target.value);
   });
 

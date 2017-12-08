@@ -39,8 +39,6 @@
       mapPinMain.style.left = (mapPinMain.offsetLeft - shift.x) + 'px';
     };
 
-
-
     var onMouseUp = function (upEvt) {
       upEvt.preventDefault();
 

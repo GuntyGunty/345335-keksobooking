@@ -1,19 +1,19 @@
 'use strict';
 
 (function () {
-  var inputSelectType = document.querySelector('#type');
-  var inputPriceType = document.querySelector('#price');
-  var inputRoomType = document.querySelector('#room_number');
-  var inputGuestCount = document.querySelector('#capacity');
-  var inputTimeIn = document.querySelector('#timein');
-  var inputTimeOut = document.querySelector('#timeout');
+  var typeSelectElement = document.querySelector('#type');
+  var priceInputElement = document.querySelector('#price');
+  var roomSelectElement = document.querySelector('#room_number');
+  var capacitySelectElement = document.querySelector('#capacity');
+  var timeinSelectElement = document.querySelector('#timein');
+  var timeoutSelectElement = document.querySelector('#timeout');
 
-  inputTimeIn.addEventListener('change', function (evt) {
-    inputTimeOut.value = evt.target.value;
+  timeinSelectElement.addEventListener('change', function (evt) {
+    timeoutSelectElement.value = evt.target.value;
   });
 
-  inputTimeOut.addEventListener('change', function (evt) {
-    inputTimeIn.value = evt.target.value;
+  timeoutSelectElement.addEventListener('change', function (evt) {
+    timeinSelectElement.value = evt.target.value;
   });
 
   var getPriceByApartmentType = function (type) {
@@ -27,23 +27,23 @@
     return 0;
   };
 
-  inputSelectType.addEventListener('change', function (evt) {
-    inputPriceType.min = getPriceByApartmentType(evt.target.value);
-    inputPriceType.value = getPriceByApartmentType(evt.target.value);
+  typeSelectElement.addEventListener('change', function (evt) {
+    priceInputElement.min = getPriceByApartmentType(evt.target.value);
+    priceInputElement.value = getPriceByApartmentType(evt.target.value);
   });
 
-  var getGuestCount = function (type) {
-    switch (type) {
-      case 1: return 3;
+  var getCapacityByRoomNummber = function (count) {
+    switch (count) {
+      case 1: return 1;
       case 2: return 2;
-      case 3: return 1;
+      case 3: return 3;
       case 100: return 0;
     }
+
     return 0;
   };
 
-  inputRoomType.addEventListener('change', function (evt) {
-    inputGuestCount.value = getGuestCount(evt.target.value);
+  roomSelectElement.addEventListener('change', function (evt) {
+    capacitySelectElement.value = getCapacityByRoomNummber(evt.target.value);
   });
-
 })();

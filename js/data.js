@@ -1,7 +1,14 @@
 'use strict';
 
 (function () {
-  var ADS_TITLES = ['Большая уютная квартира', 'Маленькая неуютная квартира', 'Огромный прекрасный дворец', 'Маленький ужасный дворец', 'Красивый гостевой домик', 'Некрасивый негостеприимный домик', 'Уютное бунгало далеко от моря', 'Неуютное бунгало по колено в воде'];
+  var ADS_TITLES = ['Большая уютная квартира',
+    'Маленькая неуютная квартира',
+    'Огромный прекрасный дворец',
+    'Маленький ужасный дворец',
+    'Красивый гостевой домик',
+    'Некрасивый негостеприимный домик',
+    'Уютное бунгало далеко от моря',
+    'Неуютное бунгало по колено в воде'];
   var ADS_TYPES = ['flat', 'house', 'bungalo'];
   var CHECK_TIMES = ['12:00', '13:00', '14:00'];
   var APARTMENT_FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
@@ -14,17 +21,17 @@
     return 'img/avatars/user0' + i + '.png';
   };
 
-  window.getAds = function (advertsCount) {
+  window.getFeatures = function (featuresCount) {
 
-    var adverts = [];
+    var features = [];
 
-    for (var i = 0; i < advertsCount; i++) {
+    for (var i = 0; i < featuresCount; i++) {
       var coordinate = {
         x: window.utils.getRandomInteger(300, 900),
         y: window.utils.getRandomInteger(100, 500)
       };
 
-      adverts.push({
+      features.push({
         author: {
           avatar: getAvatar(i + 1),
         },
@@ -32,11 +39,11 @@
           title: ADS_TITLES[window.utils.getRandomInteger(0, 7)],
           address: coordinate.x + ', ' + coordinate.y,
           price: window.utils.getRandomInteger(1000, 1000000),
-          type: ADS_TYPES[window.utils.getRandomInteger(0, 2)],
+          type: ADS_TYPES[window.utils.getRandomInteger(0, ADS_TYPES.length)],
           rooms: window.utils.getRandomInteger(1, 5),
           guests: window.utils.getRandomInteger(1, 15),
-          checkin: CHECK_TIMES[window.utils.getRandomInteger(0, 2)],
-          checkout: CHECK_TIMES[window.utils.getRandomInteger(0, 2)],
+          checkin: CHECK_TIMES[window.utils.getRandomInteger(0, CHECK_TIMES.length)],
+          checkout: CHECK_TIMES[window.utils.getRandomInteger(0, CHECK_TIMES.lenght)],
           features: getRandomFeatures(APARTMENT_FEATURES),
           description: '',
           photos: []
@@ -47,7 +54,7 @@
         }
       });
     }
-    return adverts;
+    return features;
   };
 })();
 

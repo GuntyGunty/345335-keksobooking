@@ -12,31 +12,27 @@
   mapPinMain.addEventListener('mousedown', function (evt) {
     evt.preventDefault();
 
-    var startCoords = {
-      x: evt.clientX,
-      y: evt.clientY
-    };
-
-
     var onMouseMove = function (moveEvt) {
       moveEvt.preventDefault();
-
-      // mapPinMain.style.top=Math.max(Math.min(moveEvt.pageX-offsetX,mapPinMain.parentNode.clientWidth-mapPinMain.clientWidth),0)+'px'
+      var MIN_Y = 100;
+      var MAX_Y = 500;
 
       var shift = {
-        x: startCoords.x - moveEvt.clientX,
-        y: startCoords.y - moveEvt.clientY
+        x: mapPinMain.offsetLeft + moveEvt.movementX,
+        y: mapPinMain.offsetTop + moveEvt.movementY
       };
 
-      startCoords = {
-        x: moveEvt.clientX,
-        y: moveEvt.clientY
-      };
+      if (shift.y < MIN_Y) {
+        shift.y = MIN_Y;
+      }
+      if (shift.y > MAX_Y) {
+        shift.y = MAX_Y;
+      }
 
-      document.querySelector('#address').value = 'x: ' + startCoords.x + ', ' + 'y: ' + startCoords.y;
+      document.querySelector('#address').value = 'x: ' + shift.x + ', ' + 'y: ' + shift.y;
 
-      mapPinMain.style.top = (mapPinMain.offsetTop - shift.y) + 'px';
-      mapPinMain.style.left = (mapPinMain.offsetLeft - shift.x) + 'px';
+      mapPinMain.style.top = shift.y + 'px';
+      mapPinMain.style.left = shift.x + 'px';
     };
 
     var onMouseUp = function (upEvt) {

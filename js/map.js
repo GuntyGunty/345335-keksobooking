@@ -12,6 +12,7 @@
   mapPinMain.addEventListener('mousedown', function (evt) {
     evt.preventDefault();
 
+
     var onMouseMove = function (moveEvt) {
       moveEvt.preventDefault();
       var MIN_Y = 100;
@@ -52,9 +53,11 @@
 
     for (var i = 0; i < feature.length; i++) {
       var pinElement = window.getPinElement(feature[i]);
-      pinElement.addEventListener('click', onClickPin(i));
+
+      pinElement.addEventListener('click', window.showCard(i));
 
       fragment.appendChild(pinElement);
+
     }
 
     document.querySelector('.map__pins').appendChild(fragment);
@@ -68,26 +71,6 @@
     featuresForm.classList.remove('notice__form--disabled');
     window.utils.setDisabledValueToAllFieldsets(false);
   });
-
-  var onClickPin = function (i) {
-    return function (evt) {
-      var target = evt.currentTarget;
-      window.disableActivePin();
-
-      target.classList.add('map__pin--active');
-
-      window.removePopup();
-
-      var popup = window.renderPopup(feature[i]);
-      var cloosePopup = popup.querySelector('.popup__close');
-      cloosePopup.addEventListener('click', function () {
-        window.removePopup();
-        window.disableActivePin();
-      });
-
-      document.addEventListener('keydown', window.onEscKeyDown);
-    };
-  };
 
   window.onEscKeyDown = function (evt) {
     if (evt.keyCode === ESC_KEYCODE) {

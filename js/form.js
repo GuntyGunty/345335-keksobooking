@@ -26,6 +26,7 @@
 
   var syncValueWithMin = function (element, value) {
     element.min = value;
+    element.value = value;
   };
 
   window.synchronizeFields(typeSelectElement, priceInputElement, typeArray, priceArray, syncValueWithMin);

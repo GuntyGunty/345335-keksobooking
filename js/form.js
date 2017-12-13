@@ -3,47 +3,31 @@
 (function () {
   var typeSelectElement = document.querySelector('#type');
   var priceInputElement = document.querySelector('#price');
+  var typeArray = ['bungalo', 'flat', 'house', 'palace'];
+  var priceArray = [0, 1000, 5000, 10000];
+
+
   var roomSelectElement = document.querySelector('#room_number');
   var capacitySelectElement = document.querySelector('#capacity');
+  var RoomNumbersArray = ['1', '2', '3', '100'];
+  var CapacitiesArray = ['1', '2', '3', '0'];
+
   var timeinSelectElement = document.querySelector('#timein');
   var timeoutSelectElement = document.querySelector('#timeout');
+  var timesArray = ['12:00', '13:00', '14:00'];
 
-  timeinSelectElement.addEventListener('change', function (evt) {
-    timeoutSelectElement.value = evt.target.value;
-  });
-
-  timeoutSelectElement.addEventListener('change', function (evt) {
-    timeinSelectElement.value = evt.target.value;
-  });
-
-  var getPriceByApartmentType = function (type) {
-    switch (type) {
-      case 'bungalo': return 0;
-      case 'flat': return 1000;
-      case 'house': return 5000;
-      case 'palace': return 10000;
-    }
-
-    return 0;
+  var syncValues = function (element, value) {
+    element.value = value;
   };
 
-  typeSelectElement.addEventListener('change', function (evt) {
-    priceInputElement.min = getPriceByApartmentType(evt.target.value);
-    priceInputElement.value = getPriceByApartmentType(evt.target.value);
-  });
+  window.synchronizeFields(timeinSelectElement, timeoutSelectElement, timesArray, timesArray, syncValues);
+  window.synchronizeFields(timeinSelectElement, timeoutSelectElement, timesArray, timesArray, syncValues);
+  window.synchronizeFields(roomSelectElement, capacitySelectElement, RoomNumbersArray, CapacitiesArray, syncValues);
 
-  var getCapacityByRoomNummber = function (count) {
-    switch (count) {
-      case 1: return 1;
-      case 2: return 2;
-      case 3: return 3;
-      case 100: return 0;
-    }
-
-    return 0;
+  var syncValueWithMin = function (element, value) {
+    element.min = value;
   };
 
-  roomSelectElement.addEventListener('change', function (evt) {
-    capacitySelectElement.value = getCapacityByRoomNummber(evt.target.value);
-  });
+  window.synchronizeFields(typeSelectElement, priceInputElement, typeArray, priceArray, syncValueWithMin);
+
 })();

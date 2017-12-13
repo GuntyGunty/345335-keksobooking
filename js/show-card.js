@@ -3,8 +3,6 @@
 (function () {
   window.showCard = function (elem) {
 
-    var feature = window.getFeatures(8);
-
     return function (evt) {
       var target = evt.currentTarget;
       window.disableActivePin();
@@ -13,7 +11,7 @@
 
       window.removePopup();
 
-      var popup = window.renderPopup(feature[elem]);
+      var popup = window.renderPopup(elem);
       var cloosePopup = popup.querySelector('.popup__close');
       cloosePopup.addEventListener('click', function () {
         window.removePopup();

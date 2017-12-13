@@ -1,9 +1,12 @@
 'use strict';
 
 (function () {
-  window.synchronizeFields = function (formElement1, formElement2, formElementsArray1, formElementsArray2, type, callback) {
-    formElement1.addEventListener('change', function () {
-      callback(formElement1, formElement2, formElementsArray1, formElementsArray2, type);
+  var synchronizeFields = function (elem1, elem2, value1, value2, callback) {
+    elem1.addEventListener('change', function (evt) {
+      var index = value1.indexOf(evt.target.value);
+      callback(elem2, value2[index]);
     });
   };
+
+  window.synchronizeFields = synchronizeFields;
 })();

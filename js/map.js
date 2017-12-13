@@ -54,7 +54,7 @@
     for (var i = 0; i < feature.length; i++) {
       var pinElement = window.getPinElement(feature[i]);
 
-      pinElement.addEventListener('click', window.showCard(i));
+      pinElement.addEventListener('click', window.showCard(feature[i]));
 
       fragment.appendChild(pinElement);
 

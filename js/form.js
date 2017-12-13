@@ -14,18 +14,20 @@
 
   var timeinSelectElement = document.querySelector('#timein');
   var timeoutSelectElement = document.querySelector('#timeout');
-  var timeinArray = ['12:00', '13:00', '14:00'];
-  var timeoutArray = ['12:00', '13:00', '14:00'];
+  var timesArray = ['12:00', '13:00', '14:00'];
 
+  var syncValues = function (element, value) {
+    element.value = value;
+  };
 
-  window.synchronizeFields(timeinSelectElement, timeoutSelectElement, timeinArray, timeoutArray, 'value', setSynchronize);
+  window.synchronizeFields(timeinSelectElement, timeoutSelectElement, timesArray, timesArray, syncValues);
+  window.synchronizeFields(timeinSelectElement, timeoutSelectElement, timesArray, timesArray, syncValues);
+  window.synchronizeFields(roomSelectElement, capacitySelectElement, RoomNumbersArray, CapacitiesArray, syncValues);
 
-  window.synchronizeFields(typeSelectElement, priceInputElement, typeArray, priceArray, 'value', setSynchronize);
+  var syncValueWithMin = function (element, value) {
+    element.min = value;
+  };
 
-  window.synchronizeFields(roomSelectElement, capacitySelectElement, RoomNumbersArray, CapacitiesArray, 'value', setSynchronize);
-
-  function setSynchronize(formElement1, formElement2, formElementsArray1, formElementsArray2, type) {
-    formElement2[type] = formElementsArray2[formElementsArray1.indexOf(formElement1.value)];
-  }
+  window.synchronizeFields(typeSelectElement, priceInputElement, typeArray, priceArray, syncValueWithMin);
 
 })();

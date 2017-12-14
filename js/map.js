@@ -48,25 +48,10 @@
 
   });
 
-  var renderPins = function () {
-    var fragment = document.createDocumentFragment();
-
-    for (var i = 0; i < feature.length; i++) {
-      var pinElement = window.getPinElement(feature[i]);
-
-      pinElement.addEventListener('click', window.showCard(feature[i]));
-
-      fragment.appendChild(pinElement);
-
-    }
-
-    document.querySelector('.map__pins').appendChild(fragment);
-  };
-
   mapPinMain.addEventListener('mouseup', function () {
     map.classList.remove('map--faded');
 
-    renderPins();
+    // window.upload();
 
     featuresForm.classList.remove('notice__form--disabled');
     window.utils.setDisabledValueToAllFieldsets(false);

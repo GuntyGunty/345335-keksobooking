@@ -1,6 +1,7 @@
 'use strict';
 
 (function () {
+
   var typeSelectElement = document.querySelector('#type');
   var priceInputElement = document.querySelector('#price');
   var typeArray = ['bungalo', 'flat', 'house', 'palace'];
@@ -26,6 +27,7 @@
 
   var syncValueWithMin = function (element, value) {
     element.min = value;
+    element.value = value;
   };
 
   window.synchronizeFields(typeSelectElement, priceInputElement, typeArray, priceArray, syncValueWithMin);

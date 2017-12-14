@@ -7,7 +7,7 @@
 
     xhr.addEventListener('load', function () {
       if (xhr.status === 200) {
-        
+
         onLoad(xhr.response);
       } else {
         onError(xhr.response);

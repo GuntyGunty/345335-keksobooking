@@ -3,8 +3,6 @@
 (function () {
   var ESC_KEYCODE = 27;
 
-  var feature = window.getFeatures(8);
-
   var map = document.querySelector('.map');
   var featuresForm = document.querySelector('.notice__form');
   var mapPinMain = map.querySelector('.map__pin--main');
@@ -50,8 +48,7 @@
 
   mapPinMain.addEventListener('mouseup', function () {
     map.classList.remove('map--faded');
-
-    // window.upload();
+    window.backend.load(window.successHandler, window.errorHandler);
 
     featuresForm.classList.remove('notice__form--disabled');
     window.utils.setDisabledValueToAllFieldsets(false);

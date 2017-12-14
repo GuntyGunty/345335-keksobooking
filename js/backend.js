@@ -9,7 +9,8 @@ window.backend = (function () {
       xhr.send();
     },
     save: function (data, onLoad, onError) {
-      var xhr = window.upload(data, onLoad, onError);
+
+      var xhr = window.upload(onLoad, onError);
 
       xhr.open('POST', window.SERVER_URL);
       xhr.send(data);

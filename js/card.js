@@ -2,7 +2,6 @@
 
 (function () {
   window.renderPopup = function (feature) {
-
     var popupElement = document.querySelector('template').content.querySelector('article.map__card').cloneNode(true);
     popupElement.querySelector('h3').textContent = feature.offer.title;
     popupElement.querySelector('small').textContent = feature.offer.address;

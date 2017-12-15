@@ -31,7 +31,10 @@
     </div>
 
     <div class="map__filters-container">
-      <form action="#" class="map__filters" autocomplete="off">
+      <form class="map__filters" autocomplete="off"
+      enctype="multipart/form-data"
+      method="post"
+      action="https://1510.dump.academy/keksobooking">
         <select name="housing-type" id="housing-type" class="map__filter">
           <option value="any" selected>Любой тип жилья</option>
           <option value="flat">Квартира</option>
@@ -261,6 +264,10 @@
 
 <script src="js/card.js"></script>
 <script src="js/show-card.js"></script>
+
+<script src="js/load.js"></script>
+<script src="js/backend.js"></script>
+<script src="js/upload.js"></script>
 <script src="js/synchronize-fields.js"></script>
 <script src="js/form.js"></script>
 

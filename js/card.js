@@ -36,5 +36,6 @@
       map.removeChild(oldPopup);
     }
   };
+
 })();
 

@@ -1,24 +1,35 @@
 'use strict';
 
 (function () {
-  window.showCard = function (elem) {
+  window.showCard = function (ad) {
+    var popupElement = document.querySelector('template').content.querySelector('article.map__card').cloneNode(true);
+    popupElement.querySelector('h3').textContent = ad.offer.title;
+    popupElement.querySelector('small').textContent = ad.offer.address;
+    popupElement.querySelector('h3 + p + p').textContent = ad.offer.price + ' ₽/ночь';
+    popupElement.querySelector('h4').textContent = window.utils.translate[ad.offer.type];
+    popupElement.querySelector('h4 + p').textContent = ad.offer.rooms + ' для ' + ad.offer.guests + ' гостей';
+    popupElement.querySelector('h4 + p + p').ad = 'Заезд после ' + ad.offer.checkin + ', выезд до ' + ad.offer.checkout;
+    popupElement.querySelector('ul + p').textContent = ad.offer.description;
+    popupElement.querySelector('.popup__avatar').src = ad.author.avatar;
 
-    return function (evt) {
-      var target = evt.currentTarget;
-      window.disableActivePin();
+    var oldFeatures = popupElement.querySelector('.popup__features');
+    var newFeatures = oldFeatures.cloneNode();
+    for (var i = 0; i < ad.offer.features.length; i++) {
+      var liElement = document.createElement('li');
+      liElement.className = 'feature feature--' + ad.offer.features[i];
 
-      target.classList.add('map__pin--active');
+      newFeatures.appendChild(liElement);
+    }
+    popupElement.replaceChild(newFeatures, oldFeatures);
 
+    var cloosePopup = popupElement.querySelector('.popup__close');
+    cloosePopup.addEventListener('click', function () {
       window.removePopup();
+      window.pin.disableActivePin();
+    });
 
-      var popup = window.renderPopup(elem);
-      var cloosePopup = popup.querySelector('.popup__close');
-      cloosePopup.addEventListener('click', function () {
-        window.removePopup();
-        window.disableActivePin();
-      });
-
-      document.addEventListener('keydown', window.onEscKeyDown);
-    };
+    document.querySelector('.map').appendChild(popupElement);
   };
+
 })();
+

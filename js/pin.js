@@ -1,29 +1,57 @@
 'use strict';
 
-(function () {
-  window.getPinElement = function (feature) {
+window.pin = (function () {
+  var ESC_KEYCODE = 27;
 
-    var buttonElement = document.createElement('button');
-    var imgElement = document.createElement('img');
+  var onEscKeyDown = function (evt) {
+    if (evt.keyCode === ESC_KEYCODE) {
+      window.removePopup();
+      window.pin.disableActivePin();
 
-    buttonElement.style = 'left: ' + feature.location.x + 'px; top: ' + feature.location.y + 'px;';
-    buttonElement.classList.add('map__pin');
-
-    imgElement.src = feature.author.avatar;
-    imgElement.width = '40';
-    imgElement.height = '40';
-    imgElement.draggable = false;
-
-    buttonElement.appendChild(imgElement);
-
-    return buttonElement;
+      document.removeEventListener('keydown', window.onEscKeyDown);
+    }
   };
 
-  window.disableActivePin = function () {
-    var activePin = document.querySelector('.map__pin--active');
+  var onClickPin = function (elem) {
+    return function (evt) {
+      var target = evt.currentTarget;
+      window.pin.disableActivePin();
 
-    if (activePin) {
-      activePin.classList.remove('map__pin--active');
+      target.classList.add('map__pin--active');
+
+      window.removePopup();
+
+      window.showCard(elem);
+
+      document.addEventListener('keydown', onEscKeyDown);
+    };
+  };
+
+  return {
+    getPinElement: function (ad) {
+      var buttonElement = document.createElement('button');
+      var imgElement = document.createElement('img');
+
+      buttonElement.style = 'left: ' + ad.location.x + 'px; top: ' + ad.location.y + 'px;';
+      buttonElement.classList.add('map__pin');
+
+      imgElement.src = ad.author.avatar;
+      imgElement.width = '40';
+      imgElement.height = '40';
+      imgElement.draggable = false;
+
+      buttonElement.appendChild(imgElement);
+
+      buttonElement.addEventListener('click', onClickPin(ad));
+
+      return buttonElement;
+    },
+    disableActivePin: function () {
+      var activePin = document.querySelector('.map__pin--active');
+
+      if (activePin) {
+        activePin.classList.remove('map__pin--active');
+      }
     }
   };
 })();

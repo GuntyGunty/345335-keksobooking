@@ -1,17 +1,16 @@
 'use strict';
 
-(function () {
-  var ESC_KEYCODE = 27;
-
+window.map = (function () {
   var map = document.querySelector('.map');
-  var featuresForm = document.querySelector('.notice__form');
+  var adsForm = document.querySelector('.notice__form');
   var mapPinMain = map.querySelector('.map__pin--main');
 
   mapPinMain.addEventListener('mousedown', function (evt) {
     evt.preventDefault();
 
-
+    document.querySelector('#address').value = 'x: ' + mapPinMain.offsetLeft + ' y: ' + mapPinMain.offsetTop;
     var onMouseMove = function (moveEvt) {
+
       moveEvt.preventDefault();
       var MIN_Y = 100;
       var MAX_Y = 500;
@@ -34,6 +33,23 @@
       mapPinMain.style.left = shift.x + 'px';
     };
 
+    var isRendered = false;
+    mapPinMain.addEventListener('mouseup', function () {
+      if (!isRendered) {
+        var onLoad = function (ads) {
+          map.classList.remove('map--faded');
+
+          window.ads = ads;
+
+          window.render(ads);
+          adsForm.classList.remove('notice__form--disabled');
+          window.utils.setDisabledValueToAllFieldsets(false);
+        };
+
+        window.backend.load(onLoad, window.errorHandler);
+      }
+    });
+
     var onMouseUp = function (upEvt) {
       upEvt.preventDefault();
 
@@ -45,23 +61,6 @@
     document.addEventListener('mouseup', onMouseUp);
 
   });
-
-  mapPinMain.addEventListener('mouseup', function () {
-    map.classList.remove('map--faded');
-    window.backend.load(window.successHandler, window.errorHandler);
-
-    featuresForm.classList.remove('notice__form--disabled');
-    window.utils.setDisabledValueToAllFieldsets(false);
-  });
-
-  window.onEscKeyDown = function (evt) {
-    if (evt.keyCode === ESC_KEYCODE) {
-      window.removePopup();
-      window.disableActivePin();
-
-      document.addEventListener('keydown', window.onEscKeyDown);
-    }
-  };
 
   window.utils.setDisabledValueToAllFieldsets(true);
 })();

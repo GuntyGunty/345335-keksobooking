@@ -63,8 +63,4 @@
   });
 
   window.utils.setDisabledValueToAllFieldsets(true);
-
-  return {
-
-  };
 })();

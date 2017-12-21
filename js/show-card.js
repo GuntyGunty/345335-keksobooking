@@ -30,6 +30,5 @@
 
     document.querySelector('.map').appendChild(popupElement);
   };
-
 })();
 

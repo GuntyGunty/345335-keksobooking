@@ -19,6 +19,35 @@
 
   var syncValues = function (element, value) {
     element.value = value;
+
+    if (element.id === 'capacity') {
+      switch (value) {
+        case '1':
+          element[0].disabled = true;
+          element[1].disabled = true;
+          element[2].disabled = false;
+          element[3].disabled = true;
+          break;
+        case '2':
+          element[0].disabled = true;
+          element[1].disabled = false;
+          element[2].disabled = false;
+          element[3].disabled = true;
+          break;
+        case '3':
+          element[0].disabled = false;
+          element[1].disabled = false;
+          element[2].disabled = false;
+          element[3].disabled = true;
+          break;
+        case '0':
+          element[0].disabled = true;
+          element[1].disabled = true;
+          element[2].disabled = true;
+          element[3].disabled = false;
+          break;
+      }
+    }
   };
 
   window.synchronizeFields(timeinSelectElement, timeoutSelectElement, timesArray, timesArray, syncValues);

@@ -2,11 +2,11 @@
 
 (function () {
   window.removePopup = function () {
-    var map = document.querySelector('.map');
-    var oldPopup = map.querySelector('.popup');
+    var mapElement = document.querySelector('.map');
+    var oldPopupElement = mapElement.querySelector('.popup');
 
-    if (oldPopup) {
-      map.removeChild(oldPopup);
+    if (oldPopupElement) {
+      mapElement.removeChild(oldPopupElement);
     }
   };
 })();

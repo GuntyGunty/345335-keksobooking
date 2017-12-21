@@ -1,6 +1,6 @@
 'use strict';
 
-window.map = (function () {
+(function () {
   var mapElement = document.querySelector('.map');
   var adsFormElement = document.querySelector('.notice__form');
   var mapPinMainElement = mapElement.querySelector('.map__pin--main');
@@ -63,4 +63,8 @@ window.map = (function () {
   });
 
   window.utils.setDisabledValueToAllFieldsets(true);
+
+  return {
+
+  };
 })();

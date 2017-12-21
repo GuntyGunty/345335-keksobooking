@@ -27,32 +27,38 @@
   };
 
   var filterAds = function (ads) {
-    var filteredAds = ads.filter(function (ad) {
-      if (filterSetting.type !== 'any' && ad.offer.type !== filterSetting.type) {
-        return false;
+    var filteredAds = [];
+
+    for (var i = 0; i < ads.length; i++) {
+      if (filteredAds.length >= MAX) {
+        break;
       }
-      if (filterSetting.price !== 'any' && getCostDegree(ad.offer.price) !== filterSetting.price) {
-        return false;
+
+      if (filterSetting.type !== 'any' && ads[i].offer.type !== filterSetting.type) {
+        continue;
       }
-      if (filterSetting.rooms !== 'any' && ad.offer.rooms !== +filterSetting.rooms) {
-        return false;
+      if (filterSetting.price !== 'any' && getCostDegree(ads[i].offer.price) !== filterSetting.price) {
+        continue;
       }
-      if (filterSetting.guests !== 'any' && ad.offer.guests !== +filterSetting.guests) {
-        return false;
+      if (filterSetting.rooms !== 'any' && ads[i].offer.rooms !== +filterSetting.rooms) {
+        continue;
+      }
+      if (filterSetting.guests !== 'any' && ads[i].offer.guests !== +filterSetting.guests) {
+        continue;
       }
       if (filterSetting.features.length) {
         var isIncludes = filterSetting.features.every(function (f) {
-          return ad.offer.features.indexOf(f) > -1;
+          return ads[i].offer.features.indexOf(f) > -1;
         });
         if (!isIncludes) {
-          return false;
+          continue;
         }
       }
 
-      return true;
-    });
+      filteredAds.push(ads[i]);
+    }
 
-    return filteredAds.slice(0, MAX);
+    return filteredAds;
   };
 
   filterContainer.addEventListener('change', function (evt) {
@@ -81,6 +87,5 @@
 
   window.filterSetting = filterSetting;
   window.filterAds = filterAds;
-
 })();
 

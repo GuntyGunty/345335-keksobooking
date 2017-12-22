@@ -25,7 +25,7 @@
     var cloosePopup = popupElement.querySelector('.popup__close');
     cloosePopup.addEventListener('click', function () {
       window.removePopup();
-      window.pin.disableActivePin();
+      window.pin.disableActive();
     });
 
     document.querySelector('.map').appendChild(popupElement);

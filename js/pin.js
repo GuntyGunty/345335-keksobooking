@@ -46,7 +46,7 @@ window.pin = (function () {
 
       return buttonElement;
     },
-    disableActivePin: function () {
+    disableActive: function () {
       var activePin = document.querySelector('.map__pin--active');
 
       if (activePin) {

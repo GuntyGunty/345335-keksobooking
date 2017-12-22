@@ -6,7 +6,7 @@ window.pin = (function () {
   var onEscKeyDown = function (evt) {
     if (evt.keyCode === ESC_KEYCODE) {
       window.removePopup();
-      window.pin.disableActivePin();
+      window.pin.disableActive();
 
       document.removeEventListener('keydown', window.onEscKeyDown);
     }
@@ -15,7 +15,7 @@ window.pin = (function () {
   var onClickPin = function (elem) {
     return function (evt) {
       var target = evt.currentTarget;
-      window.pin.disableActivePin();
+      window.pin.disableActive();
 
       target.classList.add('map__pin--active');
 
@@ -46,7 +46,7 @@ window.pin = (function () {
 
       return buttonElement;
     },
-    disableActivePin: function () {
+    disableActive: function () {
       var activePin = document.querySelector('.map__pin--active');
 
       if (activePin) {

@@ -1,14 +1,14 @@
 'use strict';
 
 (function () {
-  var mapPins = document.querySelector('.map__pins');
+  var mapPinElements = document.querySelector('.map__pins');
 
   var clearOldPins = function () {
-    var pins = mapPins.querySelectorAll('.map__pin:not(.map__pin--main)');
+    var pins = mapPinElements.querySelectorAll('.map__pin:not(.map__pin--main)');
     var pinsArray = Array.from(pins);
     if (pinsArray.length) {
       pinsArray.forEach(function (pin) {
-        mapPins.removeChild(pin);
+        mapPinElements.removeChild(pin);
       });
     }
   };

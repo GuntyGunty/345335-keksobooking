@@ -5,8 +5,8 @@
 
   var typeSelectElement = document.querySelector('#type');
   var priceInputElement = document.querySelector('#price');
-  var typeArray = ['bungalo', 'flat', 'house', 'palace'];
-  var priceArray = [0, 1000, 5000, 10000];
+  var typesArray = ['bungalo', 'flat', 'house', 'palace'];
+  var pricesArray = [0, 1000, 5000, 10000];
 
   var roomSelectElement = document.querySelector('#room_number');
   var capacitySelectElement = document.querySelector('#capacity');
@@ -19,6 +19,35 @@
 
   var syncValues = function (element, value) {
     element.value = value;
+
+    if (element.id === 'capacity') {
+      switch (value) {
+        case '1':
+          element[0].disabled = true;
+          element[1].disabled = true;
+          element[2].disabled = false;
+          element[3].disabled = true;
+          break;
+        case '2':
+          element[0].disabled = true;
+          element[1].disabled = false;
+          element[2].disabled = false;
+          element[3].disabled = true;
+          break;
+        case '3':
+          element[0].disabled = false;
+          element[1].disabled = false;
+          element[2].disabled = false;
+          element[3].disabled = true;
+          break;
+        case '0':
+          element[0].disabled = true;
+          element[1].disabled = true;
+          element[2].disabled = true;
+          element[3].disabled = false;
+          break;
+      }
+    }
   };
 
   window.synchronizeFields(timeinSelectElement, timeoutSelectElement, timesArray, timesArray, syncValues);
@@ -29,7 +58,7 @@
     element.min = value;
   };
 
-  window.synchronizeFields(typeSelectElement, priceInputElement, typeArray, priceArray, syncValueWithMin);
+  window.synchronizeFields(typeSelectElement, priceInputElement, typesArray, pricesArray, syncValueWithMin);
 
   var onSuccessSend = function () {
     form.reset();
@@ -37,6 +66,6 @@
 
   form.addEventListener('submit', function (evt) {
     evt.preventDefault();
-    window.backend.save(new FormData(form), onSuccessSend, window.errorHandler);
+    window.backend.save(new FormData(form), onSuccessSend, window.showError);
   });
 })();

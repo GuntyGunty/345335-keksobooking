@@ -1,14 +1,14 @@
 'use strict';
 
-window.map = (function () {
-  var map = document.querySelector('.map');
-  var adsForm = document.querySelector('.notice__form');
-  var mapPinMain = map.querySelector('.map__pin--main');
+(function () {
+  var mapElement = document.querySelector('.map');
+  var adsFormElement = document.querySelector('.notice__form');
+  var mapPinMainElement = mapElement.querySelector('.map__pin--main');
 
-  mapPinMain.addEventListener('mousedown', function (evt) {
+  mapPinMainElement.addEventListener('mousedown', function (evt) {
     evt.preventDefault();
 
-    document.querySelector('#address').value = 'x: ' + mapPinMain.offsetLeft + ' y: ' + mapPinMain.offsetTop;
+    document.querySelector('#address').value = 'x: ' + mapPinMainElement.offsetLeft + ' y: ' + mapPinMainElement.offsetTop;
     var onMouseMove = function (moveEvt) {
 
       moveEvt.preventDefault();
@@ -16,8 +16,8 @@ window.map = (function () {
       var MAX_Y = 500;
 
       var shift = {
-        x: mapPinMain.offsetLeft + moveEvt.movementX,
-        y: mapPinMain.offsetTop + moveEvt.movementY
+        x: mapPinMainElement.offsetLeft + moveEvt.movementX,
+        y: mapPinMainElement.offsetTop + moveEvt.movementY
       };
 
       if (shift.y < MIN_Y) {
@@ -29,24 +29,24 @@ window.map = (function () {
 
       document.querySelector('#address').value = 'x: ' + shift.x + ', ' + 'y: ' + shift.y;
 
-      mapPinMain.style.top = shift.y + 'px';
-      mapPinMain.style.left = shift.x + 'px';
+      mapPinMainElement.style.top = shift.y + 'px';
+      mapPinMainElement.style.left = shift.x + 'px';
     };
 
     var isRendered = false;
-    mapPinMain.addEventListener('mouseup', function () {
+    mapPinMainElement.addEventListener('mouseup', function () {
       if (!isRendered) {
         var onLoad = function (ads) {
-          map.classList.remove('map--faded');
+          mapElement.classList.remove('map--faded');
 
           window.ads = ads;
 
           window.render(ads);
-          adsForm.classList.remove('notice__form--disabled');
+          adsFormElement.classList.remove('notice__form--disabled');
           window.utils.setDisabledValueToAllFieldsets(false);
         };
 
-        window.backend.load(onLoad, window.errorHandler);
+        window.backend.load(onLoad, window.showError);
       }
     });
 

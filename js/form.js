@@ -5,8 +5,8 @@
 
   var typeSelectElement = document.querySelector('#type');
   var priceInputElement = document.querySelector('#price');
-  var typeArray = ['bungalo', 'flat', 'house', 'palace'];
-  var priceArray = [0, 1000, 5000, 10000];
+  var typesArray = ['bungalo', 'flat', 'house', 'palace'];
+  var pricesArray = [0, 1000, 5000, 10000];
 
   var roomSelectElement = document.querySelector('#room_number');
   var capacitySelectElement = document.querySelector('#capacity');
@@ -58,7 +58,7 @@
     element.min = value;
   };
 
-  window.synchronizeFields(typeSelectElement, priceInputElement, typeArray, priceArray, syncValueWithMin);
+  window.synchronizeFields(typeSelectElement, priceInputElement, typesArray, pricesArray, syncValueWithMin);
 
   var onSuccessSend = function () {
     form.reset();
@@ -66,6 +66,6 @@
 
   form.addEventListener('submit', function (evt) {
     evt.preventDefault();
-    window.backend.save(new FormData(form), onSuccessSend, window.errorHandler);
+    window.backend.save(new FormData(form), onSuccessSend, window.showError);
   });
 })();

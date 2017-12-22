@@ -12,15 +12,15 @@
     popupElement.querySelector('ul + p').textContent = ad.offer.description;
     popupElement.querySelector('.popup__avatar').src = ad.author.avatar;
 
-    var oldFeatures = popupElement.querySelector('.popup__features');
-    var newFeatures = oldFeatures.cloneNode();
+    var oldFeatureElements = popupElement.querySelector('.popup__features');
+    var newFeatureElements = oldFeatureElements.cloneNode();
     for (var i = 0; i < ad.offer.features.length; i++) {
       var liElement = document.createElement('li');
       liElement.className = 'feature feature--' + ad.offer.features[i];
 
-      newFeatures.appendChild(liElement);
+      newFeatureElements.appendChild(liElement);
     }
-    popupElement.replaceChild(newFeatures, oldFeatures);
+    popupElement.replaceChild(newFeatureElements, oldFeatureElements);
 
     var cloosePopup = popupElement.querySelector('.popup__close');
     cloosePopup.addEventListener('click', function () {

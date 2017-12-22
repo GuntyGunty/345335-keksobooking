@@ -46,7 +46,7 @@
           window.utils.setDisabledValueToAllFieldsets(false);
         };
 
-        window.backend.load(onLoad, window.errorHandler);
+        window.backend.load(onLoad, window.showError);
       }
     });
 

@@ -1,15 +1,15 @@
 'use strict';
 
-window.utils = (function () {
+(function () {
+
   var DEBOUNCE_TIME = 500;
   var lastTimeout;
-
-  return {
+  window.utils = {
     setDisabledValueToAllFieldsets: function (status) {
-      var allFieldSets = document.querySelectorAll('fieldset');
+      var allFieldSetElements = document.querySelectorAll('fieldset');
 
-      for (var i = 0; i < allFieldSets.length; i++) {
-        allFieldSets[i].disabled = status;
+      for (var i = 0; i < allFieldSetElements.length; i++) {
+        allFieldSetElements[i].disabled = status;
       }
     },
     translate: function (word) {

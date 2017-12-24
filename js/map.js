@@ -1,19 +1,21 @@
 'use strict';
 
 (function () {
+  var MIN_Y = 100;
+  var MAX_Y = 500;
+
   var mapElement = document.querySelector('.map');
   var adsFormElement = document.querySelector('.notice__form');
   var mapPinMainElement = mapElement.querySelector('.map__pin--main');
+  var addressElement = document.querySelector('#address');
 
   mapPinMainElement.addEventListener('mousedown', function (evt) {
     evt.preventDefault();
 
-    document.querySelector('#address').value = 'x: ' + mapPinMainElement.offsetLeft + ' y: ' + mapPinMainElement.offsetTop;
+    addressElement.value = 'x: ' + mapPinMainElement.offsetLeft + ' y: ' + mapPinMainElement.offsetTop;
     var onMouseMove = function (moveEvt) {
 
       moveEvt.preventDefault();
-      var MIN_Y = 100;
-      var MAX_Y = 500;
 
       var shift = {
         x: mapPinMainElement.offsetLeft + moveEvt.movementX,
@@ -27,7 +29,7 @@
         shift.y = MAX_Y;
       }
 
-      document.querySelector('#address').value = 'x: ' + shift.x + ', ' + 'y: ' + shift.y;
+      addressElement.value = 'x: ' + shift.x + ', ' + 'y: ' + shift.y;
 
       mapPinMainElement.style.top = shift.y + 'px';
       mapPinMainElement.style.left = shift.x + 'px';

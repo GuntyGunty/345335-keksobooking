@@ -1,6 +1,6 @@
 'use strict';
 
-window.backend = (function () {
+(function () {
   var TIMEOUT = 10000;
   window.SERVER_URL = 'https://1510.dump.academy/keksobooking';
 
@@ -40,7 +40,7 @@ window.backend = (function () {
     return xhr;
   };
 
-  return {
+  window.backend = {
     load: function (onLoad, onError) {
       var xhr = getData(onLoad, onError);
 

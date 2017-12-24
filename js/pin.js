@@ -1,6 +1,6 @@
 'use strict';
 
-window.pin = (function () {
+(function () {
   var ESC_KEYCODE = 27;
 
   var onEscKeyDown = function (evt) {
@@ -8,7 +8,7 @@ window.pin = (function () {
       window.removePopup();
       window.pin.disableActive();
 
-      document.removeEventListener('keydown', window.onEscKeyDown);
+      document.removeEventListener('keydown', onEscKeyDown);
     }
   };
 
@@ -27,12 +27,15 @@ window.pin = (function () {
     };
   };
 
-  return {
+  window.pin = {
     getPinElement: function (ad) {
       var buttonElement = document.createElement('button');
       var imgElement = document.createElement('img');
 
-      buttonElement.style = 'left: ' + ad.location.x + 'px; top: ' + ad.location.y + 'px;';
+      // ///////////не могу поймать ошибку Edge: Assignment to read-only properties is not allowed in strict mode, pin.js (35, 7)//////////////////
+
+      buttonElement.style.left = ad.location.x + 'px';
+      buttonElement.style.top = ad.location.y + 'px';
       buttonElement.classList.add('map__pin');
 
       imgElement.src = ad.author.avatar;
@@ -47,10 +50,10 @@ window.pin = (function () {
       return buttonElement;
     },
     disableActive: function () {
-      var activePin = document.querySelector('.map__pin--active');
+      var activePinElement = document.querySelector('.map__pin--active');
 
-      if (activePin) {
-        activePin.classList.remove('map__pin--active');
+      if (activePinElement) {
+        activePinElement.classList.remove('map__pin--active');
       }
     }
   };

@@ -2,7 +2,7 @@
 
 (function () {
   window.showCard = function (ad) {
-    var popupElement = document.querySelector('template').content.querySelector('article.map__card').cloneNode(true);
+    var popupElement = document.querySelector('template').content.querySelector('.map__card').cloneNode(true);
     popupElement.querySelector('h3').textContent = ad.offer.title;
     popupElement.querySelector('small').textContent = ad.offer.address;
     popupElement.querySelector('h3 + p + p').textContent = ad.offer.price + ' ₽/ночь';
@@ -14,12 +14,14 @@
 
     var oldFeatureElements = popupElement.querySelector('.popup__features');
     var newFeatureElements = oldFeatureElements.cloneNode();
-    for (var i = 0; i < ad.offer.features.length; i++) {
+
+    ad.offer.features.forEach(function (item) {
       var liElement = document.createElement('li');
-      liElement.className = 'feature feature--' + ad.offer.features[i];
+      liElement.className = 'feature feature--' + item;
 
       newFeatureElements.appendChild(liElement);
-    }
+    });
+
     popupElement.replaceChild(newFeatureElements, oldFeatureElements);
 
     var cloosePopup = popupElement.querySelector('.popup__close');

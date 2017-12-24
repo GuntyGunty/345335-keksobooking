@@ -1,64 +1,67 @@
 'use strict';
 
 (function () {
+  var ROOM_NUMBERS = ['1', '2', '3', '100'];
+  var CAPACITIES = ['1', '2', '3', '0'];
+  var TYPES = ['bungalo', 'flat', 'house', 'palace'];
+  var PRICES = [0, 1000, 5000, 10000];
+  var TIMES = ['12:00', '13:00', '14:00'];
+
   var form = document.querySelector('.notice__form');
 
   var typeSelectElement = document.querySelector('#type');
   var priceInputElement = document.querySelector('#price');
-  var typesArray = ['bungalo', 'flat', 'house', 'palace'];
-  var pricesArray = [0, 1000, 5000, 10000];
 
   var roomSelectElement = document.querySelector('#room_number');
   var capacitySelectElement = document.querySelector('#capacity');
-  var RoomNumbersArray = ['1', '2', '3', '100'];
-  var CapacitiesArray = ['1', '2', '3', '0'];
+
 
   var timeinSelectElement = document.querySelector('#timein');
   var timeoutSelectElement = document.querySelector('#timeout');
-  var timesArray = ['12:00', '13:00', '14:00'];
 
-  var syncValues = function (element, value) {
-    element.value = value;
 
-    if (element.id === 'capacity') {
+  var syncValues = function (elements, value) {
+    elements.value = value;
+
+    if (elements.id === 'capacity') {
       switch (value) {
         case '1':
-          element[0].disabled = true;
-          element[1].disabled = true;
-          element[2].disabled = false;
-          element[3].disabled = true;
+          elements[0].disabled = true;
+          elements[1].disabled = true;
+          elements[2].disabled = false;
+          elements[3].disabled = true;
           break;
         case '2':
-          element[0].disabled = true;
-          element[1].disabled = false;
-          element[2].disabled = false;
-          element[3].disabled = true;
+          elements[0].disabled = true;
+          elements[1].disabled = false;
+          elements[2].disabled = false;
+          elements[3].disabled = true;
           break;
         case '3':
-          element[0].disabled = false;
-          element[1].disabled = false;
-          element[2].disabled = false;
-          element[3].disabled = true;
+          elements[0].disabled = false;
+          elements[1].disabled = false;
+          elements[2].disabled = false;
+          elements[3].disabled = true;
           break;
         case '0':
-          element[0].disabled = true;
-          element[1].disabled = true;
-          element[2].disabled = true;
-          element[3].disabled = false;
+          elements[0].disabled = true;
+          elements[1].disabled = true;
+          elements[2].disabled = true;
+          elements[3].disabled = false;
           break;
       }
     }
   };
 
-  window.synchronizeFields(timeinSelectElement, timeoutSelectElement, timesArray, timesArray, syncValues);
-  window.synchronizeFields(timeoutSelectElement, timeinSelectElement, timesArray, timesArray, syncValues);
-  window.synchronizeFields(roomSelectElement, capacitySelectElement, RoomNumbersArray, CapacitiesArray, syncValues);
+  window.synchronizeFields(timeinSelectElement, timeoutSelectElement, TIMES, TIMES, syncValues);
+  window.synchronizeFields(timeoutSelectElement, timeinSelectElement, TIMES, TIMES, syncValues);
+  window.synchronizeFields(roomSelectElement, capacitySelectElement, ROOM_NUMBERS, CAPACITIES, syncValues);
 
   var syncValueWithMin = function (element, value) {
     element.min = value;
   };
 
-  window.synchronizeFields(typeSelectElement, priceInputElement, typesArray, pricesArray, syncValueWithMin);
+  window.synchronizeFields(typeSelectElement, priceInputElement, TYPES, PRICES, syncValueWithMin);
 
   var onSuccessSend = function () {
     form.reset();

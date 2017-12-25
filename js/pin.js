@@ -2,6 +2,7 @@
 
 (function () {
   var ESC_KEYCODE = 27;
+  var IMG_SIZE = 40;
 
   var onEscKeyDown = function (evt) {
     if (evt.keyCode === ESC_KEYCODE) {
@@ -39,8 +40,8 @@
       buttonElement.classList.add('map__pin');
 
       imgElement.src = ad.author.avatar;
-      imgElement.width = '40';
-      imgElement.height = '40';
+      imgElement.width = IMG_SIZE;
+      imgElement.height = IMG_SIZE;
       imgElement.draggable = false;
 
       buttonElement.appendChild(imgElement);
